@@ -1,4 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+    height: 100%;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+@mixin margin ($ml: 0, $mr: 0, $mt: 0, $mb: 0) {
+    margin-left: $ml;
+    margin-right: $mr;
+    margin-top: $mt;
+    margin-bottom: $mb;
+}
+
+@mixin padding ($pl: 0, $pr: 0, $pt: 0, $pb: 0) {
+    margin-left: $pl;
+    margin-right: $pr;
+    margin-top: $pt;
+    margin-bottom: $pb;
+}

@@ -1,0 +1,41 @@
+@use './../../styles.scss' as styles;
+
+mat-form-field {
+    padding-top: 10px;
+}
+
+.input-first-name {
+    @include styles.margin($ml: 0, $mr: 16px, $mt: 0, $mb: 0);
+    width:calc(50% - 8px);
+}
+
+.input-last-name {
+    @include styles.margin($ml: 0, $mr: 0, $mt: 0, $mb: 0);
+    width:calc(50% - 8px);
+}
+
+.input-birth-date {
+    @include styles.margin($ml: 0, $mr: 0, $mt: 0, $mb: 0);
+    width:100%;
+}
+
+.input-street {
+    @include styles.margin($ml: 0, $mr: 16px, $mt: 0, $mb: 0);
+    width:70%;
+}
+
+.input-house {
+    @include styles.margin($ml: 0, $mr: 0, $mt: 0, $mb: 0);
+    width:calc(30% - 16px);
+}
+
+.input-zip-code {
+    @include styles.margin($ml: 0, $mr: 16px, $mt: 0, $mb: 0);
+    width: 30%;
+}
+
+.input-city {
+    @include styles.margin($ml: 0, $mr: 0, $mt: 0, $mb: 0);
+    width:calc(70% - 16px);
+}
+
