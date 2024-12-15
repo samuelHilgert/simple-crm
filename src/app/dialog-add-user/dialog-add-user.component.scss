@@ -6,27 +6,27 @@ mat-form-field {
 
 .input-first-name {
     @include styles.margin($ml: 0, $mr: 16px, $mt: 0, $mb: 0);
-    width:calc(50% - 8px);
+    width: calc(50% - 8px);
 }
 
 .input-last-name {
     @include styles.margin($ml: 0, $mr: 0, $mt: 0, $mb: 0);
-    width:calc(50% - 8px);
+    width: calc(50% - 8px);
 }
 
 .input-birth-date {
     @include styles.margin($ml: 0, $mr: 0, $mt: 0, $mb: 0);
-    width:100%;
+    width: 100%;
 }
 
 .input-street {
     @include styles.margin($ml: 0, $mr: 16px, $mt: 0, $mb: 0);
-    width:70%;
+    width: 70%;
 }
 
 .input-house {
     @include styles.margin($ml: 0, $mr: 0, $mt: 0, $mb: 0);
-    width:calc(30% - 16px);
+    width: calc(30% - 16px);
 }
 
 .input-zip-code {
@@ -36,6 +36,5 @@ mat-form-field {
 
 .input-city {
     @include styles.margin($ml: 0, $mr: 0, $mt: 0, $mb: 0);
-    width:calc(70% - 16px);
+    width: calc(70% - 16px);
 }
-

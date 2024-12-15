@@ -2,7 +2,6 @@
     height: 100vh;
     width: 100%;
     background-color: white;
-    color:black;
 }
 
 .mnenu-icon {
@@ -58,6 +57,7 @@ mat-toolbar-row {
     justify-content: flex-start;
     gap: 12px;
     background-color: rgb(10, 65, 105);
+    color:white;
 }
 
 .router-container {
