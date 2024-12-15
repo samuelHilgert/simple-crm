@@ -34,7 +34,7 @@ export class UserComponent {
     readonly dialog = inject(MatDialog);
   
     openDialog(): void {
-      console.log('The dialog is open');
+      // console.log('The dialog is open');
       const dialogRef = this.dialog.open(DialogAddUserComponent, {
         // data: {name: this.name(), animal: this.animal()},
       });
