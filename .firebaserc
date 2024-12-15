@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "simple-crm-4c5f7"
+  },
+  "targets": {
+    "simple-crm-4c5f7": {
+      "hosting": {
+        "simple-crm": [
+          "simple-crm-4c5f7"
+        ]
+      }
+    }
+  }
+}

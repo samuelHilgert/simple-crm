@@ -1,0 +1,23 @@
+{
+  "hosting": [
+    {
+      "public": "/dist/simple-crm/browser",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
+      "target": "simple-crm",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}
