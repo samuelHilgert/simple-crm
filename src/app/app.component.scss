@@ -41,11 +41,16 @@
 }
 
 .logo-container {
-    padding:0 16px;
+    padding:0 8px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.04);
     min-height: 56px;
     display: flex;
     align-items: center;
+
+    img {
+        height:auto;
+        max-width:100%;
+    }
 }
 
 mat-toolbar,
