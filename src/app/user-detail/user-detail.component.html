@@ -5,18 +5,15 @@
       [matMenuTriggerFor]="headerMenu"
       class="profile-data-menu-icon"
       mat-icon-button
-      aria-label="edit or delete the header data">
+      aria-label="edit or delete the header data"
+    >
       <mat-icon>more_vert</mat-icon>
     </button>
     <!-- Open address menu -->
     <mat-menu #headerMenu="matMenu">
-      <button mat-menu-item>
+      <button mat-menu-item (click)="openDialogEditHeader()">
         <mat-icon>edit</mat-icon>
         <span>Edit</span>
-      </button>
-      <button mat-menu-item>
-        <mat-icon>delete</mat-icon>
-        <span>Delete</span>
       </button>
     </mat-menu>
     <!-- End of address menu -->
@@ -42,13 +39,9 @@
   </mat-card-header>
   <!-- Open address menu -->
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>
+    <button mat-menu-item (click)="openDialogEditAddress()">
       <mat-icon>edit</mat-icon>
       <span>Edit</span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon>delete</mat-icon>
-      <span>Delete</span>
     </button>
   </mat-menu>
   <!-- End of address menu -->

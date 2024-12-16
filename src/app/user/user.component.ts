@@ -26,7 +26,7 @@ import { RouterLink } from '@angular/router';
     MatDialogModule,
     MatCardModule,
     CommonModule,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss',
@@ -36,15 +36,11 @@ export class UserComponent implements OnInit {
   user = new User();
   userList: any[] = [];
 
-  constructor(private firestore: Firestore) {}
+  constructor(public dialog: MatDialog, private firestore: Firestore) {}
 
   ngOnInit(): void {
     this.getUserDataList();
   }
-
-  // readonly animal = signal('');
-  // readonly name = model('');
-  readonly dialog = inject(MatDialog);
 
   openDialog(): void {
     // console.log('The dialog is open');

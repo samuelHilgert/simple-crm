@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatCardContent } from '@angular/material/card';
 import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
@@ -8,6 +8,9 @@ import { User } from '../models/user.class';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import { DialogEditHeaderComponent } from '../dialog-edit-header/dialog-edit-header.component';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogEditAddressComponent } from '../dialog-edit-address/dialog-edit-address.component';
 
 @Component({
   selector: 'app-user-detail',
@@ -18,7 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatButtonModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
   ],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.scss',
@@ -27,7 +30,11 @@ export class UserDetailComponent implements OnInit {
   currentUserId: any;
   user: User = new User();
 
-  constructor(private route: ActivatedRoute, private firestore: Firestore) {}
+  constructor(
+    private route: ActivatedRoute,
+    private firestore: Firestore,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     // Holen der ID aus der URL (z.B. /user/:id)
@@ -59,4 +66,21 @@ export class UserDetailComponent implements OnInit {
     }
   }
 
+  openDialogEditHeader(): void {
+    console.log('The dialog is open');
+    const dialogRef = this.dialog.open(DialogEditHeaderComponent, {});
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  openDialogEditAddress(): void {
+    console.log('The dialog is open');
+    const dialogRef = this.dialog.open(DialogEditAddressComponent, {});
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
+  }
 }
