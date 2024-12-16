@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, OnInit } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import {
   MatDialogActions,
@@ -12,9 +12,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { User } from '../models/user.class';
 import { FormsModule } from '@angular/forms';
-import { Firestore, collection, addDoc, collectionData, getFirestore } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, getDocs, query } from '@angular/fire/firestore'; 
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { doc } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -37,28 +37,45 @@ import { doc } from 'firebase/firestore';
   styleUrl: './dialog-add-user.component.scss',
   standalone: true,
 })
-export class DialogAddUserComponent {
+export class DialogAddUserComponent implements OnInit { 
   user = new User();
   birthDate: Date = new Date();
-  firestore: Firestore = inject(Firestore); // Firestore Instance
+  firestore: Firestore = inject(Firestore); // injiziert Firebase aus app.config
+  userList: any[] = [];
 
   constructor() {
-    console.log('Firestore Instance:', this.firestore); // Überprüfe, ob Firestore richtig injiziert wurde
+    this.getUserDataList();
+  }
+
+  ngOnInit() {
+    // noch kein Code vorhanden
   }
 
   // Methode zum Hinzufügen eines Benutzers zu Firestore
+  // wird aufgerufen, wenn UserDaten nach Eingabe gespeichert werden sollen
   saveUser() {
-    if (!this.user.firstName || !this.user.lastName || !this.birthDate) {
-      console.log('Fehlende Benutzerdaten');
-      return;
+    if(this.checkUserDataMissing()) {
+      this.addUser();
+      console.log('Aktueller Benutzer:', this.user);
     }
+  }
 
-    this.user.birthDate = this.birthDate.getTime(); // Umwandlung in Zeitstempel
-    console.log('Aktueller Benutzer:', this.user);
+  // Eingabedaten werden überprüft
+  checkUserDataMissing() {
+    if (!this.user.firstName || !this.user.lastName || !this.birthDate || !this.user.street || !this.user.houseNumber || !this.user.zipCode || !this.user.city) {
+      console.log('Fehlende Benutzerdaten, bitte ergänzen');
+      return false;
+    } else {
+      console.log('Benutzerdaten vollständig');
+      return true;
+    }
+  }
 
-    // Dokument in die Firestore-Datenbank hinzufügen
+  // fügt neuen Benutzer in Datenbank hinzu
+  addUser() {
+    this.user.birthDate = this.birthDate.getTime(); // Umwandlung Datum in Zeitstempel
     const userCollection = collection(this.firestore, 'users');
-    addDoc(userCollection, { ...this.user, birthDate: this.user.birthDate })
+    addDoc(userCollection, { ...this.user, birthDate: this.user.birthDate }) // der spread operator ... übernimmt die daten so aus dem objekt user, ohne diesen würde das ganze objekt als einzelnes feld gespeichert werden
       .then((docRef) => {
         console.log('Benutzer erfolgreich hinzugefügt:', docRef.id);
       })
@@ -66,17 +83,20 @@ export class DialogAddUserComponent {
         console.error('Fehler beim Hinzufügen des Benutzers:', error);
       });
   }
-
+  
   // Methode, um alle Benutzer aus Firestore zu laden
-  getUsers() {
-    const usersCollection = collection(this.firestore, 'users');
-    collectionData(usersCollection, { idField: 'id' }).subscribe((users) => {
-      console.log('Benutzerdaten:', users);
-    });
-  }
+  async getUserDataList() {
+    try {
+      const userCollection = collection(this.firestore, 'users'); // Sammle die 'users' Collection
+      const querySnapshot = await getDocs(userCollection); // Hole alle Dokumente aus der Sammlung
 
-  // Dokumentreferenz für ein einzelnes Dokument holen
-  getSingleDocRef(colId: string, docId: string) {
-    return doc(collection(this.firestore, colId), docId); // Holen einer Referenz für ein einzelnes Dokument
+      this.userList = querySnapshot.docs.map(doc => { // ohne querySnapshot erhält man eine Reihe an Infos aus der firebase. mit querySnapshot kann man bestimmte Elemente herauslesen und direkt in ein array überführen, in diesem Fall .docs (also alle dokumente)
+       // nachdem die dokumente mit samt allen infos in einem array liegen, will man nur bestimmte infos der dokumente anzeigen lassen. Das geschieht mit map
+        return { id: doc.id, ...doc.data() }; // Mapping der Daten jedes Dokuments in die userList
+      });
+      console.log('Benutzerliste:', this.userList);
+    } catch (error) {
+      console.error('Fehler beim Abrufen der Benutzerdaten:', error);
+    }
   }
 }
