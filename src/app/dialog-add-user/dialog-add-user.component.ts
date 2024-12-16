@@ -60,12 +60,10 @@ import { CommonModule } from '@angular/common';
 export class DialogAddUserComponent implements OnInit {
   user = new User();
   birthDate: Date = new Date();
-  firestore: Firestore = inject(Firestore); // injiziert Firebase aus app.config
-  userList: any[] = [];
+  // firestore: Firestore = inject(Firestore); // injiziert Firebase aus app.config
   loading: boolean = false;
 
-  constructor(public dialogRef : MatDialogRef<DialogAddUserComponent>) {
-    this.getUserDataList();
+  constructor(public dialogRef : MatDialogRef<DialogAddUserComponent>, private firestore: Firestore) {
   }
 
   ngOnInit() {
@@ -93,7 +91,8 @@ export class DialogAddUserComponent implements OnInit {
       !this.user.street ||
       !this.user.houseNumber ||
       !this.user.zipCode ||
-      !this.user.city
+      !this.user.city ||
+      !this.user.mail 
     ) {
       console.log('Fehlende Benutzerdaten, bitte ergänzen');
       return false;
@@ -114,23 +113,6 @@ export class DialogAddUserComponent implements OnInit {
       .catch((error) => {
         console.error('Fehler beim Hinzufügen des Benutzers:', error);
       });
-  }
-
-  // Methode, um alle Benutzer aus Firestore zu laden
-  async getUserDataList() {
-    try {
-      const userCollection = collection(this.firestore, 'users'); // Sammle die 'users' Collection
-      const querySnapshot = await getDocs(userCollection); // Hole alle Dokumente aus der Sammlung
-
-      this.userList = querySnapshot.docs.map((doc) => {
-        // ohne querySnapshot erhält man eine Reihe an Infos aus der firebase. mit querySnapshot kann man bestimmte Elemente herauslesen und direkt in ein array überführen, in diesem Fall .docs (also alle dokumente)
-        // nachdem die dokumente mit samt allen infos in einem array liegen, will man nur bestimmte infos der dokumente anzeigen lassen. Das geschieht mit map
-        return { id: doc.id, ...doc.data() }; // Mapping der Daten jedes Dokuments in die userList
-      });
-      console.log('Benutzerliste:', this.userList);
-    } catch (error) {
-      console.error('Fehler beim Abrufen der Benutzerdaten:', error);
-    }
   }
 
   closeDialog() {

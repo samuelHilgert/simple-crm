@@ -38,3 +38,8 @@ mat-form-field {
     @include styles.margin($ml: 0, $mr: 0, $mt: 0, $mb: 0);
     width: calc(70% - 16px);
 }
+
+.input-mail {
+    @include styles.margin($ml: 0, $mr: 0, $mt: 0, $mb: 0);
+    width: 100%;
+}

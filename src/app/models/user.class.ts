@@ -6,6 +6,7 @@ export class User {
     houseNumber: number = 0;
     zipCode: number = 0;
     city: string = '';
+    mail: string = '';
   
     constructor(obj?: any) {
       this.firstName = obj ? obj.firstName : '';
@@ -15,6 +16,7 @@ export class User {
       this.houseNumber = obj ? obj.houseNumber : '';
       this.zipCode = obj ? obj.zipCode : '';
       this.city = obj ? obj.city : '';
+      this.mail = obj ? obj.mail : '';
     }
   }
   
