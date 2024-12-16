@@ -1,1 +1,61 @@
-<p>user-detail works!</p>
+<mat-card appearance="outlined">
+  <mat-card-content class="header">
+    <img src="./assets/img/profiles/placeholder_man.png" alt="" />
+    <button
+      [matMenuTriggerFor]="headerMenu"
+      class="profile-data-menu-icon"
+      mat-icon-button
+      aria-label="edit or delete the header data">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <!-- Open address menu -->
+    <mat-menu #headerMenu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </mat-menu>
+    <!-- End of address menu -->
+    <div class="profile-headline-data">
+      <h2>{{ user.firstName }} {{ user.lastName }}</h2>
+      <p>{{ user.mail }}</p>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="profile-data-details-container" appearance="outlined">
+  <mat-card-header>
+    <button
+      [matMenuTriggerFor]="menu"
+      class="profile-data-menu-icon"
+      mat-icon-button
+      aria-label="edit or delete the address data"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-card-title>Address</mat-card-title>
+    <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+  </mat-card-header>
+  <!-- Open address menu -->
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>edit</mat-icon>
+      <span>Edit</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>delete</mat-icon>
+      <span>Delete</span>
+    </button>
+  </mat-menu>
+  <!-- End of address menu -->
+  <mat-card-content>
+    <p>
+      {{ user.street }} {{ user.houseNumber }} <br />
+      {{ user.zipCode }} {{ user.city }}
+    </p>
+  </mat-card-content>
+</mat-card>

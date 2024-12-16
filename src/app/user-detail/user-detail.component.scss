@@ -1,0 +1,45 @@
+@use './../../styles.scss' as styles;
+
+.header {
+    min-height: 250px;
+    background-color: rgb(0, 90, 235); 
+    display:flex;
+    justify-content: start;
+    align-items: end;
+    gap:20px;
+    border: 1px solid grey;
+
+    img {
+        height:100px;
+        width:100px;
+        object-fit: cover;
+        border-radius:100%;
+    }
+}
+
+.profile-headline-data {
+    height:100px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    gap:2px;
+    color:white;
+
+    h2, p {
+        margin:0;
+    }
+}
+
+.profile-data-details-container {
+    @include styles.margin($ml: 0, $mr: 0, $mt: 24px, $mb: 0);
+    width:100%;
+    box-sizing: border-box;
+
+}
+
+.profile-data-menu-icon {
+    position:absolute;
+    right:0;
+    top:0;
+    cursor:pointer;
+}
