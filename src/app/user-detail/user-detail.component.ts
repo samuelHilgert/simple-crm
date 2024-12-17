@@ -68,17 +68,42 @@ export class UserDetailComponent implements OnInit {
 
   openDialogEditHeader(): void {
     const dialogRef = this.dialog.open(DialogEditHeaderComponent, {});
-    dialogRef.componentInstance.user = this.user; 
+
+    // Erstelle eine Kopie des Users, um ihn im Dialog zu bearbeiten
+    const userCopy = new User(this.user);
+
+    // // Konvertiere das Datum und setze es direkt auf die Kopie des Users
+    // let birthDate = userCopy.birthDate;
+    // if (birthDate) {
+    //   let birthDateFormatted = new Date(birthDate); // Konvertiere in Date-Objekt
+    //   let birthDateFormattedEnd = this.formatDate(birthDateFormatted); // Formatieren
+    //   userCopy.birthDate = birthDateFormattedEnd; // Setze das formatierte Datum
+    // }
+
+    // Übergebe den User mit dem aktualisierten Datum an den Dialog
+    dialogRef.componentInstance.user = userCopy;
+    dialogRef.componentInstance.userId = this.currentUserId;
 
     dialogRef.afterClosed().subscribe((result) => {
+      // Optional: Nach dem Schließen des Dialogs kannst du hier mit dem Ergebnis weiterarbeiten
     });
   }
 
+    // Funktion um das Datum (noch Zeitstemple) zum Anzeigen in ein richtiges Datenformat umzuwandeln
+    // formatDate(birthDateFormatted: any) {
+    //   const month = (birthDateFormatted.getMonth() + 1)
+    //     .toString()
+    //     .padStart(2, '0');
+    //   const day = birthDateFormatted.getDate().toString().padStart(2, '0');
+    //   const year = birthDateFormatted.getFullYear();
+  
+    //   return `${month}/${day}/${year}`;
+    // }
+
   openDialogEditAddress(): void {
     const dialogRef = this.dialog.open(DialogEditAddressComponent, {});
-    dialogRef.componentInstance.user = this.user; 
-
-    dialogRef.afterClosed().subscribe((result) => {
-    });
+    dialogRef.componentInstance.user = new User(this.user);
+    dialogRef.componentInstance.userId = this.currentUserId;
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 }

@@ -53,7 +53,7 @@
   
     <mat-dialog-actions>
       <button [disabled]="loading" mat-button (click)="closeDialog()">Cancel</button>
-      <button [disabled]="loading" mat-button cdkFocusInitial>Save</button>
+      <button [disabled]="loading" mat-button cdkFocusInitial (click)="saveNewUserData()">Save</button>
     </mat-dialog-actions>
   </div>
   

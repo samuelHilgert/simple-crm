@@ -16,7 +16,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
-import { Firestore } from '@angular/fire/firestore';
+import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dialog-edit-address',
@@ -40,13 +41,57 @@ import { Firestore } from '@angular/fire/firestore';
   styleUrl: './dialog-edit-address.component.scss',
 })
 export class DialogEditAddressComponent {
+  birthDate: Date = new Date();
   loading: boolean = false;
   user: any;
+  userId: string = '';
+  birthDateFormatted: string = '';
 
   constructor(
     public dialogRef: MatDialogRef<DialogEditAddressComponent>,
-    private firestore: Firestore
+    private firestore: Firestore,
+    private route: ActivatedRoute
   ) {}
+
+  // Methode zum Hinzufügen der neuen Daten des Benutzers zu Firestore
+  // wird aufgerufen, wenn UserDaten nach Eingabe gespeichert werden sollen
+  saveNewUserData() {
+    if (this.checkUserDataMissing()) {
+      this.loading = true; // loading progessbar activated
+      this.saveChanges();
+      console.log('Aktueller Benutzer:', this.user);
+      this.loading = false; // loading progessbar deactivated
+      this.closeDialog();
+    }
+  }
+
+  // Eingabedaten werden überprüft
+  checkUserDataMissing() {
+    if (!this.user.street || !this.user.houseNumber || !this.user.zipCode || !this.user.city) {
+      console.log('Fehlende Benutzerdaten, bitte ergänzen');
+      return false;
+    } else {
+      console.log('Benutzerdaten vollständig');
+      return true;
+    }
+  }
+
+  // fügt neuen Benutzer in Datenbank hinzu
+  saveChanges() {
+    // this.user.birthDate = this.birthDate.getTime(); // Umwandlung Datum in Zeitstempel
+
+    // Dokumentreferenz für Firestore erstellen
+    const userDocRef = doc(this.firestore, 'users', this.userId);
+
+    // `updateDoc()` erwartet die Dokumentreferenz als erstes Argument
+    updateDoc(userDocRef, { ...this.user, birthDate: this.user.birthDate })
+      .then(() => {
+        console.log('Benutzer erfolgreich aktualisiert:', this.userId);
+      })
+      .catch((error) => {
+        console.error('Fehler beim Aktualisieren des Benutzers:', error);
+      });
+  }
 
   closeDialog() {
     this.dialogRef.close();

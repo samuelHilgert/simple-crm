@@ -1,7 +1,7 @@
 export class User {
     firstName: string = '';
     lastName: string = '';
-    birthDate: number = 0;
+    birthDate: any;
     street: string = '';
     houseNumber: number = 0;
     zipCode: number = 0;
