@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogEditHeaderComponent } from './dialog-edit-header.component';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { RouterModule } from '@angular/router';
+import { Firestore } from '@angular/fire/firestore';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 describe('DialogEditHeaderComponent', () => {
   let component: DialogEditHeaderComponent;
@@ -8,7 +12,8 @@ describe('DialogEditHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DialogEditHeaderComponent]
+      imports: [DialogEditHeaderComponent, MatDialogModule, RouterModule.forRoot([]) ],
+      providers: [provideAnimationsAsync(), { provide: MatDialogRef, useValue: {} }, { provide: Firestore, useValue: {} }]
     })
     .compileComponents();
     

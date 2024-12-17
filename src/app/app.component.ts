@@ -4,6 +4,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -14,13 +15,13 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    RouterLink
+    RouterLink,
+    CommonModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
 })
 export class AppComponent {
-  title = 'simple-crm';
   showFiller: boolean = false;
 }

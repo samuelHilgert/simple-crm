@@ -43,7 +43,7 @@ import { ActivatedRoute } from '@angular/router';
 export class DialogEditAddressComponent {
   birthDate: Date = new Date();
   loading: boolean = false;
-  user: any;
+  user: any = {};
   userId: string = '';
   birthDateFormatted: string = '';
 

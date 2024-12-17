@@ -36,7 +36,7 @@ import { ActivatedRoute } from '@angular/router';
     MatButtonModule,
     FormsModule,
     MatProgressBarModule,
-    CommonModule,
+    CommonModule
   ],
   providers: [provideNativeDateAdapter()],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,7 +46,7 @@ import { ActivatedRoute } from '@angular/router';
 export class DialogEditHeaderComponent {
   birthDate: Date = new Date();
   loading: boolean = false;
-  user: any;
+  user: any  = {};
   userId: string = '';
   birthDateFormatted: string = '';
 
