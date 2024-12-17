@@ -19,7 +19,7 @@
           "options": {
             "outputPath": "dist/simple-crm",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -95,6 +95,13 @@
               "src/styles.scss"
             ],
             "scripts": []
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor", 
+          "options": {
+            "protractorConfig": "protractor.conf.js",
+            "tsConfig": "tsconfig.e2e.json"      
           }
         },
         "deploy": {
