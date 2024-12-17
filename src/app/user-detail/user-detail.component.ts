@@ -67,20 +67,18 @@ export class UserDetailComponent implements OnInit {
   }
 
   openDialogEditHeader(): void {
-    console.log('The dialog is open');
     const dialogRef = this.dialog.open(DialogEditHeaderComponent, {});
+    dialogRef.componentInstance.user = this.user; 
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
     });
   }
 
   openDialogEditAddress(): void {
-    console.log('The dialog is open');
     const dialogRef = this.dialog.open(DialogEditAddressComponent, {});
+    dialogRef.componentInstance.user = this.user; 
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
     });
   }
 }

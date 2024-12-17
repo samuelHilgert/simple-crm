@@ -1,10 +1,8 @@
 import {
   Component,
   ChangeDetectionStrategy,
-  inject,
   OnInit,
 } from '@angular/core';
-import { MatButton } from '@angular/material/button';
 import {
   MatDialogActions,
   MatDialogContent,
@@ -29,8 +27,6 @@ import {
   getDocs,
   query,
 } from '@angular/fire/firestore';
-import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { doc, getDoc } from 'firebase/firestore';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
 
@@ -39,7 +35,7 @@ import { CommonModule } from '@angular/common';
   imports: [
     MatDialogContent,
     MatDialogActions,
-    MatButton,
+    MatButtonModule,
     MatDialogTitle,
     MatInputModule,
     MatFormFieldModule,
